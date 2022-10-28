@@ -1,0 +1,170 @@
+%---------------------------------------导包------------------------------------------
+\documentclass[12pt,a4paper,AutoFakeBold]{article} %字号为小四，纸张大小为a4，文档类型为article学术类，AutoFakeBold开启伪粗体功能
+\usepackage[margin=1in]{geometry} %设置边距，符合Word设定
+%\usepackage[left=2.50cm,right=2.50cm,top=2.80cm,bottom=2.50cm]{geometry} %页边距设置
+
+%%字体与行距
+\usepackage{setspace} %修改行距
+\usepackage{fontspec} %字体设置
+\usepackage{xeCJK} %中文包
+\usepackage{indentfirst} %中文首行缩进
+\usepackage[UTF8,heading=true]{ctex} %修改标题样式
+
+%%图表、公式包
+\usepackage{graphicx} %插入图片
+\graphicspath{{Figures/}} %文章所用图片在当前目录下的Figures目录
+%\usepackage{subfigure} %并排子图，subcaption包含了subfigure
+\usepackage{caption}
+\usepackage{subcaption} %这两个包是为了调整图表标题和子标题
+\usepackage{booktabs} %画三线表
+\usepackage{amsmath,amsthm,amssymb,amsfonts} %数学公式包
+
+%%摘要，目录，页眉页脚
+\usepackage{abstract} %调整摘要格式
+\usepackage{lipsum} %随机从某著作中挑选段落生成，\lipsum[2]
+\usepackage{titlesec}
+\usepackage{titletoc} %这两个包是为了修改目录样式
+\usepackage{fancyhdr} %设置全文页眉、页脚的格式
+
+%%其他
+\setlength{\headheight}{27pt} %解决警告中headheight过小的问题 
+
+%--------------------------------------前期设置-----------------------------------------
+%设置文中的各种引用和链接
+
+%%目录
+\usepackage{hyperref} %对目录生成链接，注：该宏包可能与其他宏包冲突，故放在所有引用的宏包之后
+\usepackage{cleveref} %实现图片和表格、公式的引用，cleveref包必须放在hyperref包之后
+\renewcommand{\contentsname}{\centerline{\heiti\zihao{-3} 目录}} %经过设置word格式后，居中，黑体，小三，加粗
+
+\titlecontents{section}[0cm]{\bfseries\songti\fontsize{14pt} %1级标题，宋体四号，加粗，标题与页面距离，下面的解释可能有误
+{\baselineskip}\selectfont}{\hspace*{1em}\contentslabel{1em}\ } %\hspace*{1em}调整标号与页面距离，\contentslabel{1em}调整标号与标题之间间距，
+{}{\titlerule*[0.5pc]{$\cdot$}\contentspage\hspace*{0cm}} %\titlerule*[0.5pc]{$\cdot$}设置标题后引线，\contentspage\hspace*{0cm}页码末尾与页面距离
+
+\titlecontents{subsection}[0cm]{\bfseries\songti\fontsize{12pt}	%1.1级标题，宋体小四
+{\baselineskip}\selectfont}{\hspace*{3em}\contentslabel{1.5em}\ }
+{}{\titlerule*[0.5pc]{$\cdot$}\contentspage\hspace*{0cm}} 
+
+\titlecontents{subsubsection}[1cm]{\bfseries\songti\fontsize{10pt} %1.1.1级标题，宋体五号
+{\baselineskip}\selectfont}{\hspace*{3em}\contentslabel{2.5em}\ }
+{}{\titlerule*[0.5pc]{$\cdot$}\contentspage\hspace*{0cm}}
+
+%%链接和PDF属性
+\hypersetup{colorlinks = true,  %将链接文字带颜色
+	linkcolor = black, %图表引用颜色设置为蓝色
+	anchorcolor = black,
+    citecolor = blue, %文献引用颜色设置为蓝色
+	bookmarksopen = true, %展开书签
+	bookmarksnumbered = true, %书签带章节编号
+	pdftitle = Learning Notes, %标题
+	pdfauthor = Xiao} %作者
+
+%%参考文献
+\bibliographystyle{plain} %参考文献引用格式
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} %引用参考文献时，\upcite{1}，能标在右上角
+
+%%大标题
+\title{\songti\zihao{3}\textbf{20221023\textasciitilde20221029学习笔记}} %\textasciitilde表示波浪号
+\author{}
+\date{}
+
+%%章节标题
+\ctexset{ 
+	section={
+		format=\bfseries\songti\zihao{-3} %设置section标题为宋体、小三号字，\bfseries表示加粗
+	},
+	subsection={
+		format=\bfseries\songti\zihao{4} %设置subsection标题为宋体、4号字
+	},
+	subsubsection={
+		format=\bfseries\songti\zihao{-4} %设置subsubsection标题为宋体、小四号字
+	}
+}
+
+%%摘要
+%\renewcommand{\abstracttextfont}{\fangsong} %摘要内容字体为仿宋
+\renewcommand{\abstractname}{\bfseries\songti\zihao{4} 摘 \quad 要} %更改摘要二字的样式，四号，加粗
+
+%%全文字体与行距
+\setmainfont{Times New Roman} %数字英文字体
+\renewcommand{\baselinestretch}{1.5} %设置为1.5倍行距
+
+%%页眉页脚
+\pagestyle{fancy} %让页眉自动显示节标题
+
+%%图表标注
+\captionsetup[figure]{font=small,labelsep=quad} %space去掉点,period加点,不加space、period这两个就是冒号,quad是空格,small对应5号字体
+\captionsetup[table]{labelsep=quad} %使用\captionsetup[figure]{name={Fig.},labelsep=period}图片标题会变成：Fig.XXXX
+%\captionsetup[table]{font={small,bf,stretch=1.25}, justification=raggedright} %small对应5号字体，bf表示加粗，stretch=1.25设置行距为1.25，justification=raggedright表示左对齐
+
+%--------------------------------------文章开始-----------------------------------------
+\begin{document}
+	
+	\thispagestyle{empty} %设置本页无页眉页脚页码
+
+	%摘要
+	% \begin{abstract}
+	% 	\lipsum[2]
+
+	% 	\noindent{【{\bfseries\songti 关键词}】啦啦 \quad lala} %\noindent表示取消缩进
+	% \end{abstract}
+	
+	%目录
+	\tableofcontents
+	
+	%正文开始----------------------------------------------------------------------------
+	\maketitle %生成文章的大标题
+	\section{学习进度}
+
+		这周。
+
+	\newpage
+	\section{区别与优缺点}
+		\subsection{区别}
+
+			{\bfseries\songti 啦啦啦}结构示意图如图\ref{pho:structure}所示。
+		
+			\begin{figure}[htbp]
+				\centering
+				\includegraphics[scale=0.6]{structure.png}
+				\caption{结构对比}
+				\label{pho:structure}
+			\end{figure}
+
+			\subsubsection{区别区别}
+
+				这句话是测试能否进行引用及支持中文\upcite{1}。
+
+				可由公式\eqref{equ:q1-1-Loss}表示。
+				
+				对$Loss$函数求偏导得到线性方程组。
+				
+				通过矩阵法可求解常数项和系数(即$b_{0},b_{1},b_{2},...b_{n}$)。
+
+				\begin{equation}
+					Loss = \sum_{i=1}^{n} (y_i-\widehat{y_i})^2 
+					\label{equ:q1-1-Loss}
+				\end{equation}
+
+				求解得到系数如表\ref{tab:q1-humidity coefficient}所示：
+				\begin{table}[!htbp]
+					\caption{系数}%表格标题
+					\centering         
+					\begin{tabular}{cccccccc}
+						\toprule[1.5pt]%表格顶部的粗线
+						深度 & $\beta _{0}$  &  $\beta _{1}$  &   $\beta _{2}$  &   $f_{0}$  &   $f_{1}$&   $f_{2}$&   $f_{3}$\\
+						\midrule[1pt]%表格中部的粗线
+						10cm&1&2&3&4&5&6&7\\
+						20cm&1&2&3&4&5&6&7\\
+						40cm&1&2&3&4&5&6&7\\
+						\bottomrule[1.5pt]%表格底部的粗线
+					\end{tabular}
+					\label{tab:q1-humidity coefficient}%标签得放在tabular里面或后面才能正常引用
+				\end{table}
+
+	%参考文献
+	\newpage
+	\addcontentsline{toc}{section}{参考文献} %将参考文献加入目录
+	\bibliography{books}
+
+\end{document}
